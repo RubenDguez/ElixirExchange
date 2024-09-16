@@ -1,0 +1,19 @@
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(15px);
+    padding: 0px 2rem;
+}
+
+.nav-app-name {
+    color: white;
+    font-size: normal;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+}
