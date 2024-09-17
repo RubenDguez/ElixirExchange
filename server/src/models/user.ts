@@ -42,7 +42,7 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       },
     },
     {
-      tableName: 'users',
+      tableName: 'ElixirUser',
       sequelize,
       hooks: {
         beforeCreate: async (user: User) => {
