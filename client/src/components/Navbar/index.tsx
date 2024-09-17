@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../utils/auth';
 import './navbar.css';
 
 const defaultLinks = [
+  {label: 'Home', to: '/'},
   {label: 'Contact', to: '/contact'},
   {label: 'About', to: '/about'},
 ]
@@ -11,6 +12,7 @@ const defaultLinks = [
 const Navbar = () => {
   const [loginCheck, setLoginCheck] = useState(false);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const checkLogin = () => {
     if (auth.loggedIn()) setLoginCheck(true);
@@ -38,7 +40,7 @@ const Navbar = () => {
         {
           defaultLinks.map((link) => (
             <li key={link.label}>
-              <button type='button' onClick={() => navigate(link.to)}>{link.label}</button>
+              <button type='button' className={(pathname === link.to) ? 'nav-active-button' : ''} onClick={() => navigate(link.to)}>{link.label}</button>
             </li>
           ))
         }

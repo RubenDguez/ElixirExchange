@@ -24,3 +24,8 @@ nav {
     display: flex;
     gap: 1rem;
 }
+
+.nav-active-button {
+    background-color: var(--secondary);
+    color: white;
+}
