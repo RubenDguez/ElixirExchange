@@ -1,9 +1,9 @@
+import { motion } from 'framer-motion';
 import { FormEvent, useRef, useState } from 'react';
+import { login } from '../../../api/authAPI';
 import { createUser } from '../../../api/userAPI';
 import Auth from '../../../utils/auth';
 import '../Login/login.css';
-import { login } from '../../../api/authAPI';
-import { motion } from 'framer-motion';
 
 const SignUp = () => {
   const [error, setError] = useState('');

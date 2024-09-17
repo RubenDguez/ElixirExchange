@@ -1,10 +1,10 @@
+import { AnimatePresence } from 'framer-motion';
+import * as motion from 'framer-motion/client';
 import { useState } from 'react';
 import Login from '../../components/Forms/Login';
 import SignUp from '../../components/Forms/SignUp';
 import auth from '../../utils/auth';
 import './landing.css';
-import * as motion from 'framer-motion/client';
-import { AnimatePresence } from 'framer-motion';
 
 const AuthorizedLandingPage = () => {
   return (
@@ -20,7 +20,7 @@ const LoginSignUp = ({ hasAccount, setHasAccount }: { hasAccount: boolean; setHa
       {hasAccount ? (
         <motion.div key="signup" initial={{ opacity: 1, x: '-100%' }} animate={{ opacity: 1, x: 0 }} transition={{ ease: 'easeInOut' }} exit={{ opacity: 1 }}>
           <SignUp />
-          <motion.p key='have-an-account' initial={{ opacity: 1, x: '-100%' }} animate={{ opacity: 1, x: 0 }} transition={{ ease: 'easeInOut' }} exit={{ opacity: 1 }}>
+          <motion.p key="have-an-account" initial={{ opacity: 1, x: '-100%' }} animate={{ opacity: 1, x: 0 }} transition={{ ease: 'easeInOut' }} exit={{ opacity: 1 }}>
             Have an account?{' '}
             <span>
               <button onClick={() => setHasAccount(false)}>login</button>
@@ -46,9 +46,5 @@ const LoginSignUp = ({ hasAccount, setHasAccount }: { hasAccount: boolean; setHa
 export default function Landing() {
   const isAuthorized = auth.loggedIn();
   const [hasAccount, setHasAccount] = useState(false);
-  return (
-    <AnimatePresence initial={false}>
-      {isAuthorized ? <AuthorizedLandingPage /> : <LoginSignUp hasAccount={hasAccount} setHasAccount={setHasAccount} />}
-    </AnimatePresence>
-  );
+  return <AnimatePresence initial={false}>{isAuthorized ? <AuthorizedLandingPage /> : <LoginSignUp hasAccount={hasAccount} setHasAccount={setHasAccount} />}</AnimatePresence>;
 }

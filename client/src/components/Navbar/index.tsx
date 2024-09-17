@@ -4,10 +4,10 @@ import auth from '../../utils/auth';
 import './navbar.css';
 
 const defaultLinks = [
-  {label: 'Home', to: '/'},
-  {label: 'Contact', to: '/contact'},
-  {label: 'About', to: '/about'},
-]
+  { label: 'Home', to: '/' },
+  { label: 'Contact', to: '/contact' },
+  { label: 'About', to: '/about' },
+];
 
 const Navbar = () => {
   const [loginCheck, setLoginCheck] = useState(false);
@@ -24,7 +24,6 @@ const Navbar = () => {
     checkLogin();
     navigate('/');
     navigate(0);
-    
   }, [navigate]);
 
   useEffect(() => {
@@ -36,14 +35,14 @@ const Navbar = () => {
       <div className={loginCheck ? 'nav-app-name nav-app-black' : 'nav-app-name nav-app-white'}>
         <h1 onClick={() => navigate('/')}>Elixir Exchange</h1>
       </div>
-      <ul className='nav-links'>
-        {
-          defaultLinks.map((link) => (
-            <li key={link.label}>
-              <button type='button' className={(pathname === link.to) ? 'nav-active-button' : ''} onClick={() => navigate(link.to)}>{link.label}</button>
-            </li>
-          ))
-        }
+      <ul className="nav-links">
+        {defaultLinks.map((link) => (
+          <li key={link.label}>
+            <button type="button" className={pathname === link.to ? 'nav-active-button' : ''} onClick={() => navigate(link.to)}>
+              {link.label}
+            </button>
+          </li>
+        ))}
         {loginCheck && (
           <li>
             <button type="button" onClick={handleLogout}>

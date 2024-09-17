@@ -1,7 +1,7 @@
+import { motion } from 'framer-motion';
 import { FormEvent, useRef, useState } from 'react';
 import { login } from '../../../api/authAPI';
 import Auth from '../../../utils/auth';
-import { motion } from 'framer-motion';
 import './login.css';
 
 const Login = () => {
@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     const username = usernameRef.current?.value || '';
     const password = passwordRef.current?.value || '';
-    
+
     try {
       if (username === '' || password === '') throw new Error('Please fill in all fields');
       const data = await login({ username, password });
