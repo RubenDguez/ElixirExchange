@@ -42,7 +42,7 @@ const createUser = async(body: Omit<UserData, 'id'>) => {
 
   } catch (err) {
     console.log('Error from data submission:', err);
-    return [];
+    return null;
   }
 }
 

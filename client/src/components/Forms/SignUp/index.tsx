@@ -25,7 +25,10 @@ const SignUp = () => {
 
     try {
       if (username === '' || password === '' || firstName === '' || lastName === '' || email === '' || dob === '') throw new Error('Please fill in all fields');
-      await createUser({ username, password, firstName, lastName, email, dob });
+      const newUser = await createUser({ username, password, firstName, lastName, email, dob });
+      
+      if (newUser === null) throw new Error(`Invalid user data, do you have an account with us?`);
+
       const data = await login({ username, password });
       if (Object.keys(data).includes('token')) Auth.login(data.token);
       else throw new Error('invalid user data');
