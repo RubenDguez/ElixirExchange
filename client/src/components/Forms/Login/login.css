@@ -3,8 +3,6 @@
     flex-direction: column;
     justify-content: center;
     border-radius: 4px;
-    padding: 1rem 0px;
-    min-height: 80vh;
 }
 
 .form {
@@ -12,7 +10,6 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    backdrop-filter: blur(10px);
     color: white;
     border-radius: 8px;
     padding: 2rem;
@@ -44,4 +41,24 @@
     padding: 0.75rem 1rem;
     border-radius: 4px;
     text-align: center;
+}
+
+.form-toc {
+    display: flex;
+    justify-content: start;
+    padding-top: 1rem;
+    width: 50%
+}
+
+.form-toc strong {
+    color: white;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+
+    transition: all ease-in-out 0.45s;
+}
+
+.form-toc strong:hover {
+    color: var(--secondary);
 }

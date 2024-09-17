@@ -5,6 +5,10 @@ interface UserAttributes {
   id: number;
   username: string;
   password: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  dob: string;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -13,6 +17,10 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public id!: number;
   public username!: string;
   public password!: string;
+  public firstName!: string;
+  public lastName!: string;
+  public email!: string;
+  public dob!: string;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -35,14 +43,32 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      dob: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      }
     },
     {
-      tableName: 'users',
+      tableName: 'ElixirUser',
       sequelize,
       hooks: {
         beforeCreate: async (user: User) => {
