@@ -3,6 +3,8 @@ import Login from '../../components/Forms/Login';
 import SignUp from '../../components/Forms/SignUp';
 import auth from '../../utils/auth';
 import './landing.css';
+import * as motion from 'framer-motion/client';
+import { AnimatePresence } from 'framer-motion';
 
 const AuthorizedLandingPage = () => {
   return (
@@ -12,39 +14,41 @@ const AuthorizedLandingPage = () => {
   );
 };
 
-const LoginSignUp = ({hasAccount, setHasAccount}: {hasAccount: boolean, setHasAccount: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const LoginSignUp = ({ hasAccount, setHasAccount }: { hasAccount: boolean; setHasAccount: React.Dispatch<React.SetStateAction<boolean>> }) => {
   return (
-    <div className='landing'>
-    {hasAccount ? (
-      <div>
-        <SignUp />
-        <p>
-          Have an account? {' '}
-          <span>
-            <button onClick={() => setHasAccount(false)}>login</button>
-          </span>{' '}
-          instead
-        </p>
-      </div>
-    ) : (
-      <div>
-        <Login />
-        <p>
-          Don&apos;t have an account?, please{' '}
-          <span>
-            <button onClick={() => setHasAccount(true)}>Sing Up</button>
-          </span>
-        </p>
-      </div>
-    )}
-  </div>
-  )
-}
+    <div className="landing" style={{ overflow: 'hidden' }}>
+      {hasAccount ? (
+        <motion.div key="signup" initial={{ opacity: 1, x: '-100%' }} animate={{ opacity: 1, x: 0 }} transition={{ ease: 'easeInOut' }} exit={{ opacity: 1 }}>
+          <SignUp />
+          <motion.p key='have-an-account' initial={{ opacity: 1, x: '-100%' }} animate={{ opacity: 1, x: 0 }} transition={{ ease: 'easeInOut' }} exit={{ opacity: 1 }}>
+            Have an account?{' '}
+            <span>
+              <button onClick={() => setHasAccount(false)}>login</button>
+            </span>{' '}
+            instead
+          </motion.p>
+        </motion.div>
+      ) : (
+        <motion.div key="login" initial={{ opacity: 1, x: '100%' }} animate={{ opacity: 1, x: 0 }} transition={{ ease: 'easeInOut' }} exit={{ opacity: 1 }}>
+          <Login />
+          <motion.p key="do-not-have-an-account" initial={{ opacity: 1, x: '100%' }} animate={{ opacity: 1, x: 0 }} transition={{ ease: 'easeInOut' }} exit={{ opacity: 1 }}>
+            Don&apos;t have an account?, please{' '}
+            <span>
+              <button onClick={() => setHasAccount(true)}>Sing Up</button>
+            </span>
+          </motion.p>
+        </motion.div>
+      )}
+    </div>
+  );
+};
 
 export default function Landing() {
   const isAuthorized = auth.loggedIn();
   const [hasAccount, setHasAccount] = useState(false);
-
-  if (isAuthorized) return <AuthorizedLandingPage />;
-  else return <LoginSignUp hasAccount={hasAccount} setHasAccount={setHasAccount}/>
+  return (
+    <AnimatePresence initial={false}>
+      {isAuthorized ? <AuthorizedLandingPage /> : <LoginSignUp hasAccount={hasAccount} setHasAccount={setHasAccount} />}
+    </AnimatePresence>
+  );
 }
