@@ -13,8 +13,9 @@ const Login = () => {
     e.preventDefault();
     const username = usernameRef.current?.value || '';
     const password = passwordRef.current?.value || '';
-
+    
     try {
+      if (username === '' || password === '') throw new Error('Please fill in all fields');
       const data = await login({ username, password });
 
       if (Object.keys(data).includes('token')) Auth.login(data.token);
