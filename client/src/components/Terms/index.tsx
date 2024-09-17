@@ -1,5 +1,5 @@
 import Markdown from 'react-markdown';
-import rawTerms from '/terms.txt';
+import rawTerms from '/terms.md?url';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './terms.css';
