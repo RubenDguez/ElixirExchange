@@ -14,11 +14,6 @@
 body {
   font-family: "Roboto", sans-serif;
   margin: 0px auto;
-
-  background-image: url('https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_1080,w_1920/f_jpg/q_65/https://images.citybreakcdn.com/image.aspx%3FImageId%3D6715681');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
 }
 
 h1,h2,h3,h4,h5,h6, label, button {
@@ -74,8 +69,19 @@ footer {
   margin: 0px auto;
 }
 
-.app {
+.authorized-app {
   display: grid;
   min-height: 100vh;
   grid-template-rows: auto 1fr auto;
+}
+
+.not-authorized-app {
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+
+  background-image: url('https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_1080,w_1920/f_jpg/q_65/https://images.citybreakcdn.com/image.aspx%3FImageId%3D6715681');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }

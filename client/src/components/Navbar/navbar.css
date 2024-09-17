@@ -7,10 +7,17 @@ nav {
 }
 
 .nav-app-name {
-    color: white;
     font-size: normal;
     font-weight: 500;
     cursor: pointer;
+}
+
+.nav-app-black {
+    color: black;
+}
+
+.nav-app-white {
+    color: white;
 }
 
 .nav-links {

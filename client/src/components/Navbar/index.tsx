@@ -17,14 +17,12 @@ const Navbar = () => {
     else setLoginCheck(false);
   };
 
-  const handleLogin = useCallback(() => {
-    navigate('/login');
-  }, [navigate]);
-
   const handleLogout = useCallback(() => {
     auth.logout();
     checkLogin();
-    navigate('/login');
+    navigate('/');
+    navigate(0);
+    
   }, [navigate]);
 
   useEffect(() => {
@@ -33,7 +31,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <div className='nav-app-name'>
+      <div className={loginCheck ? 'nav-app-name nav-app-black' : 'nav-app-name nav-app-white'}>
         <h1 onClick={() => navigate('/')}>Elixir Exchange</h1>
       </div>
       <ul className='nav-links'>
@@ -44,13 +42,7 @@ const Navbar = () => {
             </li>
           ))
         }
-        {!loginCheck ? (
-          <li>
-            <button type="button" onClick={handleLogin}>
-              Login
-            </button>
-          </li>
-        ) : (
+        {loginCheck && (
           <li>
             <button type="button" onClick={handleLogout}>
               Logout
