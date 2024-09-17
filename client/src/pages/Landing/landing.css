@@ -1,0 +1,17 @@
+.landing {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    backdrop-filter: blur(10px);
+    height: 80vh;
+}
+
+.landing p {
+    text-align: center;
+    font-weight: 300;
+}
+
+.landing p button {
+    padding: 0.2rem 1rem;
+}

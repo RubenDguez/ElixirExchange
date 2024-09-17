@@ -1,30 +1,29 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../utils/auth';
 import './navbar.css';
 
 const defaultLinks = [
-  {label: 'Contact', to: '/contact'},
-  {label: 'About', to: '/about'},
-]
+  { label: 'Home', to: '/' },
+  { label: 'Contact', to: '/contact' },
+  { label: 'About', to: '/about' },
+];
 
 const Navbar = () => {
   const [loginCheck, setLoginCheck] = useState(false);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const checkLogin = () => {
     if (auth.loggedIn()) setLoginCheck(true);
     else setLoginCheck(false);
   };
 
-  const handleLogin = useCallback(() => {
-    navigate('/login');
-  }, [navigate]);
-
   const handleLogout = useCallback(() => {
     auth.logout();
     checkLogin();
-    navigate('/login');
+    navigate('/');
+    navigate(0);
   }, [navigate]);
 
   useEffect(() => {
@@ -33,24 +32,18 @@ const Navbar = () => {
 
   return (
     <nav>
-      <div className='nav-app-name'>
+      <div className={loginCheck ? 'nav-app-name nav-app-black' : 'nav-app-name nav-app-white'}>
         <h1 onClick={() => navigate('/')}>Elixir Exchange</h1>
       </div>
-      <ul className='nav-links'>
-        {
-          defaultLinks.map((link) => (
-            <li key={link.label}>
-              <button type='button' onClick={() => navigate(link.to)}>{link.label}</button>
-            </li>
-          ))
-        }
-        {!loginCheck ? (
-          <li>
-            <button type="button" onClick={handleLogin}>
-              Login
+      <ul className="nav-links">
+        {defaultLinks.map((link) => (
+          <li key={link.label}>
+            <button type="button" className={pathname === link.to ? 'nav-active-button' : ''} onClick={() => navigate(link.to)}>
+              {link.label}
             </button>
           </li>
-        ) : (
+        ))}
+        {loginCheck && (
           <li>
             <button type="button" onClick={handleLogout}>
               Logout

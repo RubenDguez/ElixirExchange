@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion';
 import { FormEvent, useRef, useState } from 'react';
-import { login } from '../../api/authAPI';
-import Auth from '../../utils/auth';
+import { login } from '../../../api/authAPI';
+import Auth from '../../../utils/auth';
 import './login.css';
 
 const Login = () => {
@@ -15,6 +16,7 @@ const Login = () => {
     const password = passwordRef.current?.value || '';
 
     try {
+      if (username === '' || password === '') throw new Error('Please fill in all fields');
       const data = await login({ username, password });
 
       if (Object.keys(data).includes('token')) Auth.login(data.token);
@@ -33,17 +35,17 @@ const Login = () => {
       <form ref={formRef} className="form" onSubmit={handleSubmit}>
         <h1>Login</h1>
         {error !== '' && <h4 className="form-error-message">{error}</h4>}
-        <div className="form-field">
+        <motion.div className="form-field" initial={{ opacity: 0, x: '100%' }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} exit={{ opacity: 0 }}>
           <label htmlFor="username">Username</label>
           <input ref={usernameRef} type="text" id="username" name="username" />
-        </div>
-        <div className="form-field">
+        </motion.div>
+        <motion.div className="form-field" initial={{ opacity: 0, x: '100%' }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} exit={{ opacity: 0 }}>
           <label htmlFor="password">Password</label>
           <input ref={passwordRef} type="password" id="password" name="password" />
-        </div>
-        <div className="form-action">
+        </motion.div>
+        <motion.div className="form-action" initial={{ opacity: 0, x: '100%' }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} exit={{ opacity: 0 }}>
           <button type="submit">Submit</button>
-        </div>
+        </motion.div>
       </form>
     </div>
   );
