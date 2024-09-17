@@ -50,14 +50,15 @@
     width: 50%
 }
 
-.form-toc a {
+.form-toc strong {
     color: white;
     font-weight: 600;
     text-decoration: underline;
+    cursor: pointer;
 
     transition: all ease-in-out 0.45s;
 }
 
-.form-toc a:hover {
+.form-toc strong:hover {
     color: var(--secondary);
 }

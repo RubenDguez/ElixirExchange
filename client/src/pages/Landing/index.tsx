@@ -5,6 +5,7 @@ import Login from '../../components/Forms/Login';
 import SignUp from '../../components/Forms/SignUp';
 import auth from '../../utils/auth';
 import './landing.css';
+import Terms from '../../components/Terms';
 
 const AuthorizedLandingPage = () => {
   return (
@@ -15,19 +16,25 @@ const AuthorizedLandingPage = () => {
 };
 
 const LoginSignUp = ({ hasAccount, setHasAccount }: { hasAccount: boolean; setHasAccount: React.Dispatch<React.SetStateAction<boolean>> }) => {
+  const [openTerms, setOpenTerms] = useState(false);
   return (
     <div className="landing" style={{ overflow: 'hidden' }}>
       {hasAccount ? (
-        <motion.div key="signup" initial={{ opacity: 1, x: '-100%' }} animate={{ opacity: 1, x: 0 }} transition={{ ease: 'easeInOut' }} exit={{ opacity: 1 }}>
-          <SignUp />
-          <motion.p key="have-an-account" initial={{ opacity: 1, x: '-100%' }} animate={{ opacity: 1, x: 0 }} transition={{ ease: 'easeInOut' }} exit={{ opacity: 1 }}>
-            Have an account?{' '}
-            <span>
-              <button onClick={() => setHasAccount(false)}>login</button>
-            </span>{' '}
-            instead
-          </motion.p>
-        </motion.div>
+        <AnimatePresence>
+          <motion.div key="signup" initial={{ opacity: 1, x: '-100%' }} animate={{ opacity: 1, x: 0 }} transition={{ ease: 'easeInOut' }} exit={{ opacity: 1 }}>
+            <SignUp toggleTerms={setOpenTerms} />
+            <motion.dialog open={openTerms} style={{ position: 'absolute', top: '0px', borderRadius: '4px' }}>
+              <Terms toggleTerms={setOpenTerms}/>
+            </motion.dialog>
+            <motion.p key="have-an-account" initial={{ opacity: 1, x: '-100%' }} animate={{ opacity: 1, x: 0 }} transition={{ ease: 'easeInOut' }} exit={{ opacity: 1 }}>
+              Have an account?{' '}
+              <span>
+                <button onClick={() => setHasAccount(false)}>login</button>
+              </span>{' '}
+              instead
+            </motion.p>
+          </motion.div>
+        </AnimatePresence>
       ) : (
         <motion.div key="login" initial={{ opacity: 1, x: '100%' }} animate={{ opacity: 1, x: 0 }} transition={{ ease: 'easeInOut' }} exit={{ opacity: 1 }}>
           <Login />
