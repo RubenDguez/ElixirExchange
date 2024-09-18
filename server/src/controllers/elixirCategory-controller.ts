@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Category, Drink } from '../models';
 
-//*CREATE
+// * PUT /api/category/
 export const createCategory = async (req: Request, res: Response) => {
   const { name } = req.body;
   try {
@@ -13,8 +13,7 @@ export const createCategory = async (req: Request, res: Response) => {
   }
 };
 
-//*READ
-//Get All Categories
+// * GET /api/category/
 export const getAllCategories = async (_req: Request, res: Response) => {
   try {
     const categories = await Category.findAll({ include: [Drink] });
@@ -25,7 +24,7 @@ export const getAllCategories = async (_req: Request, res: Response) => {
   }
 };
 
-//*UPDATE
+// * PUT /api/category/:id
 export const updateCategory = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name } = req.body;
