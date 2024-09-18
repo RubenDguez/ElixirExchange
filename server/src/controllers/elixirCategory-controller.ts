@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Category, Drink } from '../models';
+import { Category, Drink } from '../models/index.js';
 
 // * PUT /api/category/
 export const createCategory = async (req: Request, res: Response) => {

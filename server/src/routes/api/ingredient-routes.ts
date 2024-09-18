@@ -1,5 +1,5 @@
 import express from 'express';
-import { createIngredients, deleteIngredient, getIngredientsByDrink } from '../../controllers/elixirIngredients-controller';
+import { createIngredients, deleteIngredient, getIngredientsByDrink } from '../../controllers/elixirIngredients-controller.js';
 
 const router = express.Router();
 

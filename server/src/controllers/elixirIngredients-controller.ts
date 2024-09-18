@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Ingredient } from '../models';
+import { Ingredient } from '../models/index.js';
 
 // * POST /api/ingredients/
 export const createIngredients = async (req: Request, res: Response) => {

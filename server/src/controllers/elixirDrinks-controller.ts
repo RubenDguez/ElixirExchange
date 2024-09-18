@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Drink } from '../models';
+import { Drink } from '../models/index.js';
 
 // * POST /api/drink/
 export const createDrink = async (req: Request, res: Response) => {

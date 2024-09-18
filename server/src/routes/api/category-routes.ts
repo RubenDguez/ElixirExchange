@@ -1,5 +1,5 @@
 import express from 'express';
-import { createCategory, getAllCategories, updateCategory } from '../../controllers/elixirCategory-controller';
+import { createCategory, getAllCategories, updateCategory } from '../../controllers/elixirCategory-controller.js';
 
 const router = express.Router();
 
