@@ -2,10 +2,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import { Sequelize } from 'sequelize';
-import { UserFactory } from './user.js';
 import { ElixirCategoryFactory } from './elixirCategory.js';
-import { ElixirIngredientsFactory } from './elixirIngredients.js';
 import { ElixirDrinksFactory } from './elixirDrinks.js';
+import { ElixirIngredientsFactory } from './elixirIngredients.js';
+import { UserFactory } from './user.js';
 
 const sequelize = process.env.DB_URL
   ? new Sequelize(process.env.DB_URL, { ssl: true })
@@ -22,18 +22,13 @@ const Category = ElixirCategoryFactory(sequelize);
 const Ingredient = ElixirIngredientsFactory(sequelize);
 const Drink = ElixirDrinksFactory(sequelize);
 
-Drink.hasMany(Ingredient, {
-  onDelete: 'CASCADE'
-})
+Drink.hasMany(Ingredient, {foreignKey: 'elixirId'});
+Ingredient.belongsTo(Drink, {foreignKey: 'elixirId', as: 'elixir'});
 
-Ingredient.belongsTo(Drink);
+Category.hasMany(Drink, {foreignKey: 'categoryId'});
+Drink.belongsTo(Category, {foreignKey: 'categoryId', as: 'category'});
 
-Category.hasMany(Drink);
+User.hasMany(Drink, {foreignKey: 'userId'});
+Drink.belongsTo(User, {foreignKey: 'userId', as: 'user'});
 
-Drink.belongsTo(Category);
-
-User.hasMany(Drink);
-
-Drink.belongsTo(User);
-
-export { sequelize, User, Category, Ingredient, Drink };
+export { Category, Drink, Ingredient, sequelize, User };
