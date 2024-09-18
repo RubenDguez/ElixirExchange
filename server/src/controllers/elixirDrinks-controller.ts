@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
-import { Drink } from '../models/index.js';
+import { Drink, Ingredient, User } from '../models/index.js';
 
 // * POST /api/drink/
 export const createDrink = async (req: Request, res: Response) => {
   const { name, description, picture, instructions, categoryId, userId } = req.body;
   try {
+    console.log({ name, description, picture, instructions, categoryId, userId });
+
     const newDrink = await Drink.create({ name, description, picture, instructions, categoryId, userId });
     res.status(201).json(newDrink);
   } catch (error) {
@@ -16,7 +18,9 @@ export const createDrink = async (req: Request, res: Response) => {
 // * GET /api/drink/
 export const getAllDrinks = async (_req: Request, res: Response) => {
   try {
-    const drinks = await Drink.findAll();
+    const drinks = await Drink.findAll({
+      include: [Ingredient, { model: User, attributes: { exclude: ['password'] }, as: 'user' }],
+    });
     res.status(200).json(drinks);
   } catch (error) {
     const ERROR = error as Error;
@@ -28,7 +32,9 @@ export const getAllDrinks = async (_req: Request, res: Response) => {
 export const getDrink = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const drink = await Drink.findByPk(id);
+    const drink = await Drink.findByPk(id, {
+      include: [Ingredient, { model: User, attributes: { exclude: ['password'] }, as: 'user' }],
+    });
     if (drink) {
       res.json(drink);
       return;

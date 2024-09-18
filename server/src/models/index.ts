@@ -22,18 +22,13 @@ const Category = ElixirCategoryFactory(sequelize);
 const Ingredient = ElixirIngredientsFactory(sequelize);
 const Drink = ElixirDrinksFactory(sequelize);
 
-Drink.hasMany(Ingredient, {
-  onDelete: 'CASCADE',
-});
+Drink.hasMany(Ingredient, {foreignKey: 'elixirId'});
+Ingredient.belongsTo(Drink, {foreignKey: 'elixirId', as: 'elixir'});
 
-Ingredient.belongsTo(Drink);
+Category.hasMany(Drink, {foreignKey: 'categoryId'});
+Drink.belongsTo(Category, {foreignKey: 'categoryId', as: 'category'});
 
-Category.hasMany(Drink);
-
-Drink.belongsTo(Category);
-
-User.hasMany(Drink);
-
-Drink.belongsTo(User);
+User.hasMany(Drink, {foreignKey: 'userId'});
+Drink.belongsTo(User, {foreignKey: 'userId', as: 'user'});
 
 export { Category, Drink, Ingredient, sequelize, User };

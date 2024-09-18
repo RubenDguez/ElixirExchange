@@ -3,13 +3,13 @@ import { ElixirCategory } from './elixirCategory';
 import { User } from './user';
 
 export class ElixirDrinks extends Model<InferAttributes<ElixirDrinks>, InferCreationAttributes<ElixirDrinks>> {
-  declare id: CreationOptional<number>;
-  declare name: string;
-  declare description: string;
-  declare picture: string;
-  declare instructions: string;
-  declare categoryId: ForeignKey<ElixirCategory['id']>;
-  declare userId: ForeignKey<User['id']>;
+  public id!: CreationOptional<number>;
+  public name!: string;
+  public description!: string;
+  public picture!: string;
+  public instructions!: string;
+  public categoryId!: ForeignKey<ElixirCategory['id']>;
+  public userId!: ForeignKey<User['id']>;
 }
 
 export function ElixirDrinksFactory(sequelize: Sequelize) {
