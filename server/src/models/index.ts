@@ -2,10 +2,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import { Sequelize } from 'sequelize';
-import { UserFactory } from './user.js';
 import { ElixirCategoryFactory } from './elixirCategory.js';
-import { ElixirIngredientsFactory } from './elixirIngredients.js';
 import { ElixirDrinksFactory } from './elixirDrinks.js';
+import { ElixirIngredientsFactory } from './elixirIngredients.js';
+import { UserFactory } from './user.js';
 
 const sequelize = process.env.DB_URL
   ? new Sequelize(process.env.DB_URL, { ssl: true })
@@ -23,8 +23,8 @@ const Ingredient = ElixirIngredientsFactory(sequelize);
 const Drink = ElixirDrinksFactory(sequelize);
 
 Drink.hasMany(Ingredient, {
-  onDelete: 'CASCADE'
-})
+  onDelete: 'CASCADE',
+});
 
 Ingredient.belongsTo(Drink);
 
@@ -36,4 +36,4 @@ User.hasMany(Drink);
 
 Drink.belongsTo(User);
 
-export { sequelize, User, Category, Ingredient, Drink };
+export { Category, Drink, Ingredient, sequelize, User };
