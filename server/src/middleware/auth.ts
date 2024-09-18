@@ -13,7 +13,6 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
 
   if (authHeaders) {
     const token = authHeaders.split(' ')[1];
-
     const secretKey = process.env.JWT_SECRET_KEY || '';
 
     jwt.verify(token, secretKey, (err, user) => {

@@ -8,8 +8,8 @@ interface ElixirCategoryAttributes {
 interface ElixirCategoryCreationAttributes extends Optional<ElixirCategoryAttributes, 'id'> {}
 
 export class ElixirCategory extends Model<ElixirCategoryAttributes, ElixirCategoryCreationAttributes> implements ElixirCategory {
-  declare id: number;
-  declare name: string;
+  public id!: number;
+  public name!: string;
 }
 
 export function ElixirCategoryFactory(sequelize: Sequelize) {

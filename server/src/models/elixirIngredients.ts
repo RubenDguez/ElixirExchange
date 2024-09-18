@@ -2,11 +2,11 @@ import { DataTypes, Model, type ForeignKey, type InferAttributes, type InferCrea
 import { ElixirDrinks } from './elixirDrinks';
 
 export class ElixirIngredients extends Model<InferAttributes<ElixirIngredients>, InferCreationAttributes<ElixirIngredients>> {
-  declare id: number;
-  declare name: string;
-  declare amount: number;
-  declare unit: string;
-  declare elixirId: ForeignKey<ElixirDrinks['id']>;
+  public id!: number;
+  public name!: string;
+  public amount!: number;
+  public unit!: string;
+  public elixirId!: ForeignKey<ElixirDrinks['id']>;
 }
 
 export function ElixirIngredientsFactory(sequelize: Sequelize) {
