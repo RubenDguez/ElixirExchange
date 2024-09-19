@@ -1,5 +1,5 @@
 import { UserData } from '../interfaces/UserData';
-import Auth from '../utils/auth';
+import Auth from '../hooks/authenticate';
 
 const retrieveUsers = async () => {
   try {

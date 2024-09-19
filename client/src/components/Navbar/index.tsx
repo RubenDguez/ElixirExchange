@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import auth from '../../utils/auth';
+import useAuthenticate from '../../hooks/authenticate';
 import './navbar.css';
 
 const defaultLinks = [
@@ -13,22 +13,23 @@ const Navbar = () => {
   const [loginCheck, setLoginCheck] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const authenticate = useAuthenticate();
 
-  const checkLogin = () => {
-    if (auth.loggedIn()) setLoginCheck(true);
+  const checkLogin = useCallback(() => {
+    if (authenticate.isLoggedIn) setLoginCheck(true);
     else setLoginCheck(false);
-  };
+  }, [authenticate]);
 
   const handleLogout = useCallback(() => {
-    auth.logout();
+    authenticate.logout();
     checkLogin();
     navigate('/');
     navigate(0);
-  }, [navigate]);
+  }, [navigate, authenticate, checkLogin]);
 
   useEffect(() => {
     checkLogin();
-  }, [loginCheck]);
+  }, [loginCheck, checkLogin]);
 
   return (
     <nav>

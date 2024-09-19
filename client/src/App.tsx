@@ -1,13 +1,13 @@
 import { Outlet } from 'react-router-dom';
-import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import auth from './utils/auth';
+import Navbar from './components/Navbar';
+import useAuthenticate from './hooks/authenticate';
 
 function App() {
-  const isLoggedIn = auth.loggedIn();
+  const authenticate = useAuthenticate();
 
   return (
-    <div className={isLoggedIn ? 'authorized-app' : 'not-authorized-app'}>
+    <div className={authenticate.isLoggedIn ? 'authorized-app' : 'not-authorized-app'}>
       <Navbar />
       <main>
         <Outlet />
