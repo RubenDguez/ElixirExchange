@@ -43,12 +43,20 @@ const Navbar = () => {
             </button>
           </li>
         ))}
+
         {loginCheck && (
-          <li>
-            <button type="button" onClick={handleLogout}>
-              Logout
-            </button>
-          </li>
+          <>
+            <li>
+              <button type="button" onClick={() => navigate('/drinkSubmission')}>
+                Add Drink
+              </button>
+            </li>
+            <li>
+              <button type="button" onClick={handleLogout}>
+                Logout
+              </button>
+            </li>
+          </>
         )}
       </ul>
     </nav>

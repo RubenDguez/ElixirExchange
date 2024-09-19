@@ -4,6 +4,7 @@ import About from '../pages/About';
 import Contact from '../pages/Contact';
 import Error from '../pages/Error';
 import Landing from '../pages/Landing';
+import DrinkSubmissionForm from '../components/Forms/DrinkSubmission/drinkSubmission';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         path: '/about',
         element: <About />,
       },
+      {
+        path: '/drinkSubmission',
+        element: <DrinkSubmissionForm />,
+      }
     ],
   },
 ]);
