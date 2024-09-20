@@ -19,6 +19,10 @@ export default function useAuthenticate() {
     localStorage.removeItem('id_token');
   }, []);
 
+  const getJwt = () => {
+    return localStorage.getItem('id_token')
+  }
+
   useEffect(() => {
     setJWT(() => {
       return localStorage.getItem('id_token') || '';
@@ -47,5 +51,5 @@ export default function useAuthenticate() {
     setIsAuthorized(() => isLoggedIn && !isExpired);
   }, [jwt, profile, isLoggedIn, isExpired]);
 
-  return { profile, isAuthorized, isExpired, isLoggedIn, login, logout };
+  return { jwt, profile, isAuthorized, isExpired, isLoggedIn, login, logout, getJwt };
 }

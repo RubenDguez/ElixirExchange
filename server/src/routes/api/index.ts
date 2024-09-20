@@ -11,6 +11,6 @@ router.use('/categories', categoryRouter);
 router.use('/drink', drinkRouter);
 router.use('/ingredients', ingredientRouter);
 router.use('/users', userRouter);
-router.use('/drink-of-day', drinkOfDayRouter)
+router.use('/drink-inspiration', drinkOfDayRouter);
 
 export default router;

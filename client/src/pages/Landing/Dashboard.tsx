@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import MyDrinks from './MyDrinks/MyDrinks';
+import useAuthenticate from '../../hooks/authenticate';
 
 type TActions = null | 'AddCategory' | 'Drinks' | 'DrinkInspire';
 
 const buttons: Array<{ value: TActions; label: string }> = [
-  { value: null, label: 'Home' },
+  { value: null, label: 'My Drinks' },
   { value: 'AddCategory', label: 'Add Category' },
   { value: 'Drinks', label: 'Drink' },
   { value: 'DrinkInspire', label: 'Drink Inspiration' },
@@ -15,6 +17,9 @@ export default function Dashboard() {
   const [drinkOfTheDay, setDrinkOfTheDay] = useState('');
   const [drinkInformation, setDrinkInformation] = useState<Array<string>>(['']);
   const [drinkImg, setDrinkImg] = useState<string | undefined>('');
+  const [myDrinks, setMyDrinks] = useState<Array<{name: string, description: string}>>([])
+
+  const {getJwt} = useAuthenticate();
 
   useEffect(() => {
     setTitle(buttons.find((f) => f.value === action)!.label);
@@ -26,9 +31,13 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function getDrinkOfDay() {
-      const response = await fetch('/api/drink-of-day');
+      const response = await fetch('/api/drink-inspiration', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getJwt()}`
+        }
+      })
       const data = await response.json();
-
       const drinkName = data['drinks'][0]['strDrink'];
 
       setDrinkOfTheDay(drinkName);
@@ -60,11 +69,25 @@ export default function Dashboard() {
     }
 
     getDrinkOfDay();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function Default() {
-    return <h3>This is the default</h3>;
-  }
+  useEffect(() => {
+    async function getMyDrinks() {
+      const response = await fetch('/api/users', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getJwt()}`
+        }
+      })
+      const json = await response.json();
+      const data = await json;
+      const myDrinks = data[0]['ElixirDrinks'].map((drink: {name: string, description: string}) => ({name: drink.name, description: drink.description}));
+      setMyDrinks(myDrinks);
+    }
+    getMyDrinks();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   function AddCategory() {
     return <h3>This is the Add Category form</h3>;
@@ -112,7 +135,7 @@ export default function Dashboard() {
         return <DrinkInspiration />;
       case null:
       default:
-        return <Default />;
+        return <MyDrinks myDrinks={myDrinks}/>;
     }
   }
 
