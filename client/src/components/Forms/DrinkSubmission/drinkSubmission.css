@@ -1,0 +1,126 @@
+.drink-submission {
+    color: black;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .drink-submission input, 
+  .drink-submission textarea, 
+  .drink-submission select {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 300px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .drink-submission .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+  }
+  
+  .drink-submission .form-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    gap: 20px;
+  }
+  
+  .category-section, 
+  .ingredients-section {
+    width: 45%;
+    border: 2px solid blueviolet;
+    border-radius: 8px;
+    background-color: white;
+    padding: 20px;
+  }
+  
+  .category-section h3,
+  .ingredients-section h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  button {
+    background-color: skyblue;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: blueviolet;
+  }
+  
+  table {
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+  }
+  
+  table, th, td {
+    border: 1px solid black;
+    padding: 0.75rem;
+    text-align: left;
+  }
+  
+  thead th {
+    background-color: blueviolet;
+    color: white;
+    font-weight: bold;
+  }
+  
+  tbody td {
+    background-color: white;
+  }
+  
+  .spirit-display, 
+  .ingredient-list {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid blueviolet;
+  }
+  
+  /* Final submit button */
+  .drink-submission button {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .instructions-form-field {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .instructions-form-field label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .instructions-form-field textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid blueviolet;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+
+  
