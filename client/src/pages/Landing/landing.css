@@ -71,8 +71,7 @@
 }
 
 .dashboard .panel .operations .operations-wrapper {
-    padding: 0px 1rem;
     overflow: hidden;
     overflow-y: scroll;
-    max-height: 700px;
+    max-height: 740px;
 }

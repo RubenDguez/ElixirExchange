@@ -1,0 +1,60 @@
+.drink-inspiration-background {
+    background-position: center;
+    background-size: cover;
+}
+
+.drink-inspiration {
+    backdrop-filter: blur(5px) contrast(40%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 1rem 1rem;
+    width: 100%;
+}
+
+.drink-inspiration h2 {
+    border-bottom: 2px solid white;
+    padding-bottom: 1rem;
+}
+
+.drink-inspiration h4 {
+    border-bottom: 2px solid white;
+    margin-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.drink-inspiration-gen-info {
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.drink-inspiration-gen-info .info-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.drink-inspiration-gen-info .info {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.drink-inspiration-gen-info .info p, h5 {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+}
+
+.drink-inspiration-gen-info img {
+    border: 2px solid var(--secondary);
+    border-radius: 4px;
+}
+
+.drink-inspiration-table {
+    text-align: left;
+    width: 100%;
+}
