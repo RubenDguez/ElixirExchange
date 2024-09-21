@@ -1,0 +1,68 @@
+.add-category-form {
+    padding: 1rem 2rem;   
+}
+
+.add-category-form .form-control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.add-category-form .form-action button {
+    width: 100%;
+}
+
+.add-category-form .form-control input {
+    border: 1px solid var(--secondary);
+}
+
+.add-category-table table {
+    margin-top: 3rem;
+    border-radius: 4px;
+    width: 100%;
+    text-align: left;
+}
+
+.add-category-table table thead {
+    text-align: center;
+}
+
+.add-category-table td {
+    border-radius: 4px;
+    border: 1px solid var(--secondary);
+}
+
+.add-category-table table th, td {
+    padding: 0.5rem 4px;
+}
+
+.add-category-table table tbody tr td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-category-table table tbody tr td .action-button {
+    font-size: x-large;
+    color: tomato;
+    cursor: pointer;
+
+    transition: all ease-in 0.35s;
+}
+
+.add-category-table table tbody tr td .action-button:hover {
+    color: var(--tertiary);
+}
+
+.add-category-table tbody tr:nth-child(even) {
+    background-color: var(--secondary);
+    color: white;
+}
+
+.add-category-table tbody tr:nth-child(odd) .action-button {
+    color: var(--secondary);
+}
+
+.add-category-table tbody tr:nth-child(even) .action-button {
+    color: var(--primary);
+}

@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(60px);
     height: 800px;
     overflow-y: scroll;
 }
@@ -18,6 +18,10 @@
 }
 
 .dashboard {
+    /* background-color: white; */
+    backdrop-filter: blur(60px);
+    padding: 1rem;
+    border-radius: 4px;
     color: black;
 }
 

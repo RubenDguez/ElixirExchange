@@ -1,14 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import MyDrinks from './MyDrinks/MyDrinks';
 import useAuthenticate from '../../hooks/authenticate';
 import DrinkInspiration from './DrinkInspiration';
+import AddCategoryForm from './AddCategoryForm';
+import { DrinkInspirationContext } from '../../App';
 
 type TActions = null | 'AddCategory' | 'Drinks' | 'DrinkInspire';
 
 const buttons: Array<{ value: TActions; label: string }> = [
-  { value: null, label: 'My Drinks' },
   { value: 'AddCategory', label: 'Add Category' },
+  { value: null, label: 'My Drinks' },
   { value: 'Drinks', label: 'Drink' },
   { value: 'DrinkInspire', label: 'Drink Inspiration' },
 ];
@@ -16,9 +18,9 @@ const buttons: Array<{ value: TActions; label: string }> = [
 export default function Dashboard() {
   const [action, setAction] = useState<TActions | null>(null);
   const [title, setTitle] = useState('');
-  const [drinkInspiration, setDrinkInspiration] = useState<IDrinks | null>(null);
   const [myDrinks, setMyDrinks] = useState<Array<{ name: string; description: string }>>([]);
 
+  const drinkInspiration = useContext(DrinkInspirationContext);
   const { getJwt } = useAuthenticate();
 
   useEffect(() => {
@@ -27,20 +29,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     setAction(null);
-  }, []);
-
-  useEffect(() => {
-    async function fetchDrinkInspiration() {
-      const response = await fetch('/api/drink-inspiration', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getJwt()}`,
-        },
-      });
-      const data: IDrinks = await response.json();
-      setDrinkInspiration(data);
-    }
-    fetchDrinkInspiration();
   }, []);
 
   useEffect(() => {
@@ -59,10 +47,6 @@ export default function Dashboard() {
     getMyDrinks();
   }, []);
 
-  function AddCategory() {
-    return <h3>This is the Add Category form</h3>;
-  }
-
   function DrinkSubmission() {
     return <h3>This is the Drink option</h3>;
   }
@@ -79,7 +63,7 @@ export default function Dashboard() {
   function Operations() {
     switch (action) {
       case 'AddCategory':
-        return <AddCategory />;
+        return <AddCategoryForm />;
       case 'Drinks':
         return <DrinkSubmission />;
       case 'DrinkInspire':
