@@ -1,10 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import MyDrinks from './MyDrinks/MyDrinks';
-import useAuthenticate from '../../hooks/authenticate';
 import DrinkInspiration from './DrinkInspiration';
 import AddCategoryForm from './AddCategoryForm';
-import { DrinkInspirationContext } from '../../App';
+import { DrinkInspirationContext, MyDrinksContext } from '../../App';
 
 type TActions = null | 'AddCategory' | 'Drinks' | 'DrinkInspire';
 
@@ -18,10 +17,8 @@ const buttons: Array<{ value: TActions; label: string }> = [
 export default function Dashboard() {
   const [action, setAction] = useState<TActions | null>(null);
   const [title, setTitle] = useState('');
-  const [myDrinks, setMyDrinks] = useState<Array<{ name: string; description: string }>>([]);
-
   const drinkInspiration = useContext(DrinkInspirationContext);
-  const { getJwt } = useAuthenticate();
+  const myDrinks = useContext(MyDrinksContext);
 
   useEffect(() => {
     setTitle(buttons.find((f) => f.value === action)!.label);
@@ -29,22 +26,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     setAction(null);
-  }, []);
-
-  useEffect(() => {
-    async function getMyDrinks() {
-      const response = await fetch('/api/users', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getJwt()}`,
-        },
-      });
-      const json = await response.json();
-      const data = await json;
-      const myDrinks = data[0]['ElixirDrinks'].map((drink: { name: string; description: string }) => ({ name: drink.name, description: drink.description }));
-      setMyDrinks(myDrinks);
-    }
-    getMyDrinks();
   }, []);
 
   function DrinkSubmission() {
@@ -77,7 +58,7 @@ export default function Dashboard() {
           />;
       case null:
       default:
-        return <MyDrinks myDrinks={myDrinks} />;
+        return <MyDrinks myDrinks={myDrinks?.myDrinks} />;
     }
   }
 

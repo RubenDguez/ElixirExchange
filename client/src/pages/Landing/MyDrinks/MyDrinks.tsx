@@ -4,7 +4,7 @@ interface IMyDrinks {
   myDrinks: Array<{name: string, description: string}>
 }
 
-export default function MyDrinks({myDrinks}: IMyDrinks) {
+export default function MyDrinks({myDrinks}: Partial<IMyDrinks>) {
   return (
     <div className='my-drinks'>
       <table>
@@ -16,7 +16,7 @@ export default function MyDrinks({myDrinks}: IMyDrinks) {
         </thead>
         <tbody>
           {
-            (myDrinks.length > 0) && myDrinks.map((drink, index) => (
+            (myDrinks && myDrinks.length > 0) && myDrinks.map((drink, index) => (
               <tr key={drink.name + index}>
                 <td>{drink.name}</td>
                 <td>{drink.description}</td>

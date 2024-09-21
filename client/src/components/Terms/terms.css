@@ -12,10 +12,10 @@
 }
 
 .terms p, h2, h3, h4, h5, h6, strong {
-    font-weight: 400;
+    font-weight: 400!important;
     line-height: 1.5rem;
     letter-spacing: 1px;
-    text-align: left;
+    text-align: left!important;
 }
 
 .terms button {
