@@ -6,13 +6,13 @@ import AddCategoryForm from './AddCategoryForm';
 import { DrinkInspirationContext, MyDrinksContext } from '../../App';
 import DrinkSubmission from '../../components/Forms/DrinkSubmission/drinkSubmission';
 
-type TActions = null | 'AddCategory' | 'AddDrink' | 'DrinkInspire';
+type TActions = null | 'AddCategory' | 'AddDrink' | 'DrinkInspire' | 'MyDrinks';
 
 const buttons: Array<{ value: TActions; label: string }> = [
-  { value: 'AddCategory', label: 'Add Category' },
+  { value: null, label: 'Drink Inspiration' },
   { value: 'AddDrink', label: 'Add Drink' },
-  { value: null, label: 'My Drinks' },
-  { value: 'DrinkInspire', label: 'Drink Inspiration' },
+  { value: 'MyDrinks', label: 'My Drinks' },
+  { value: 'AddCategory', label: 'Add Category' },
 
 ];
 
@@ -45,18 +45,19 @@ export default function Dashboard() {
         return <AddCategoryForm />;
       case 'AddDrink': 
         return <DrinkSubmission /> 
-      case 'DrinkInspire':
-        return <DrinkInspiration 
-            name={drinkInspiration?.name} 
-            category={drinkInspiration?.category}
-            drinkThumb={drinkInspiration?.drinkThumb}
-            glass={drinkInspiration?.glass}
-            ingredients={drinkInspiration?.ingredients}
-            instructions={drinkInspiration?.instructions}
-          />;
+      case 'MyDrinks':
+        return <MyDrinks myDrinks={myDrinks?.myDrinks} />;
       case null:
       default:
-        return <MyDrinks myDrinks={myDrinks?.myDrinks} />;
+        return <DrinkInspiration 
+        name={drinkInspiration?.name} 
+        category={drinkInspiration?.category}
+        drinkThumb={drinkInspiration?.drinkThumb}
+        glass={drinkInspiration?.glass}
+        ingredients={drinkInspiration?.ingredients}
+        instructions={drinkInspiration?.instructions}
+      />;
+        
     }
   }
 
@@ -64,7 +65,7 @@ export default function Dashboard() {
     <div className="dashboard">
       <p className="drink-of-day">
         Drink inspiration{' '}
-        <button onClick={() => setAction('DrinkInspire')} style={{ textTransform: 'uppercase', color: 'white', backgroundColor: 'var(--tertiary)' }}>
+        <button onClick={() => setAction(null)} style={{ textTransform: 'uppercase', color: 'white', backgroundColor: 'var(--tertiary)' }}>
           {drinkInspiration?.name}
         </button>
       </p>
