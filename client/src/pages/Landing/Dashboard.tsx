@@ -4,14 +4,16 @@ import MyDrinks from './MyDrinks/MyDrinks';
 import DrinkInspiration from './DrinkInspiration';
 import AddCategoryForm from './AddCategoryForm';
 import { DrinkInspirationContext, MyDrinksContext } from '../../App';
+import DrinkSubmission from '../../components/Forms/DrinkSubmission/drinkSubmission';
 
-type TActions = null | 'AddCategory' | 'Drinks' | 'DrinkInspire';
+type TActions = null | 'AddCategory' | 'AddDrink' | 'DrinkInspire';
 
 const buttons: Array<{ value: TActions; label: string }> = [
   { value: 'AddCategory', label: 'Add Category' },
+  { value: 'AddDrink', label: 'Add Drink' },
   { value: null, label: 'My Drinks' },
-  { value: 'Drinks', label: 'Drink' },
   { value: 'DrinkInspire', label: 'Drink Inspiration' },
+
 ];
 
 export default function Dashboard() {
@@ -28,10 +30,6 @@ export default function Dashboard() {
     setAction(null);
   }, []);
 
-  function DrinkSubmission() {
-    return <h3>This is the Drink option</h3>;
-  }
-
   function OperationsWrapper({ title, children }: { title: string; children: React.ReactNode }) {
     return (
       <>
@@ -45,8 +43,8 @@ export default function Dashboard() {
     switch (action) {
       case 'AddCategory':
         return <AddCategoryForm />;
-      case 'Drinks':
-        return <DrinkSubmission />;
+      case 'AddDrink': 
+        return <DrinkSubmission /> 
       case 'DrinkInspire':
         return <DrinkInspiration 
             name={drinkInspiration?.name} 

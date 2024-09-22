@@ -1,15 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import axios from 'axios';
+import { useCallback, useRef, useState } from 'react';
 import './drinkSubmission.css';
 
 interface IIngredients {
   quantity: number;
   units: string;
-  name: string;
-}
-
-interface ISpirit {
-  id: number;
   name: string;
 }
 
@@ -20,20 +14,12 @@ function DrinkSubmission() {
   const instructionsRef = useRef<HTMLTextAreaElement>(null);
   const spiritQuantityRef = useRef<HTMLInputElement>(null);
   const [selectedSpirit, setSelectedSpirit] = useState<string>('');
-  const [spirits, setSpirits] = useState<Array<ISpirit>>([]);
 
   const quantityRef = useRef<HTMLInputElement>(null);
   const unitRef = useRef<HTMLInputElement>(null);
   const ingredientNameRef = useRef<HTMLInputElement>(null);
   const [ingredients, setIngredients] = useState<Array<IIngredients>>([]);
   const [spiritDetails, setSpiritDetails] = useState<IIngredients | null>(null);
-
-  //fetch spirits from backend
-  // useEffect(() => {
-  //   axios.get('/api/spirits')
-  //     .then(response => setSpirits(response.data))
-  //     .catch(error => console.error('Error fetching spirits:', error));
-  // }, []);
 
   // Add ingredient to the list
   const handleAddIngredient = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
