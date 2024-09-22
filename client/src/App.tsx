@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     async function getMyDrinks() {
-      const response = await fetch('/api/users/1', {
+      const response = await fetch('/api/users', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${authenticate.getJwt()}`,

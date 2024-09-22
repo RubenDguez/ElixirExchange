@@ -1,0 +1,48 @@
+.drink-submission {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.drink-submission .form-field {
+    width: 100%;
+}
+
+.drink-submission .form-field .form-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.drink-submission input, select, textarea {
+    font-family: Roboto!important;
+    font-size: medium;
+    border: 1px solid var(--secondary);
+}
+
+.drink-submission .ingredients-section .ingredients-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-grow: 1;
+}
+
+.ingredient-list table {
+    width: 100%;
+}
+
+.ingredient-list table thead .form-field {
+    text-align: left;
+}
+
+.ingredient-list table tbody tr td {
+    border: 1px solid var(--secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.drink-submission .instructions-form-field {
+    display: flex;
+    flex-direction: column;
+}
