@@ -1,0 +1,74 @@
+.add-category-form {
+    padding: 1rem 2rem;   
+}
+
+.add-category-error h3 {
+    border-radius: 4px;
+    color: yellow;
+    text-align: center!important;
+    text-transform: uppercase;
+    font-size: small;
+    padding: 0.5rem 1rem;
+    background-color: var(--error-background-color);
+}
+
+.add-category-form .form-control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.add-category-form .form-action button {
+    width: 100%;
+}
+
+.add-category-form .form-control input {
+    border: 1px solid var(--secondary);
+}
+
+.add-category-table table {
+    margin-top: 3rem;
+    border-radius: 4px;
+    width: 100%;
+    text-align: left;
+}
+
+.add-category-table table thead {
+    text-align: center;
+    border-radius: 4px;
+}
+
+.add-category-form table tbody tr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 4px;
+    border: 1px solid var(--secondary);
+    padding: 0.5rem 1rem;
+    margin-top: 4px;
+}
+
+.add-category-form table tbody tr:nth-child(odd) {
+    background-color: var(--secondary);
+    color: white;
+}
+
+.add-category-table .action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    pad: 0;
+    cursor: pointer;
+}
+
+.add-category-table .action .action-button {
+    font-size: x-large;
+    color: white;
+
+    transition: all ease-in 0.35s;
+}
+
+.add-category-table .action .action-button:hover {
+    color: var(--error-background-color);
+}

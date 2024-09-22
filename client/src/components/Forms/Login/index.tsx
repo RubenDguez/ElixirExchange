@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { FormEvent, useRef, useState } from 'react';
 import { login } from '../../../api/authAPI';
-import Auth from '../../../utils/auth';
+import useAuthenticate from '../../../hooks/authenticate';
 import './login.css';
 
 const Login = () => {
@@ -9,6 +9,8 @@ const Login = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+
+  const authenticate = useAuthenticate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -19,7 +21,7 @@ const Login = () => {
       if (username === '' || password === '') throw new Error('Please fill in all fields');
       const data = await login({ username, password });
 
-      if (Object.keys(data).includes('token')) Auth.login(data.token);
+      if (Object.keys(data).includes('token')) authenticate.login(data.token);
       else throw new Error('Failed to login');
     } catch (err) {
       const ERROR = err as Error;

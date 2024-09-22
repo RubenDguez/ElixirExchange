@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import { User } from '../models/user.js';
+import { Drink } from '../models/index.js';
 
 // GET /Users
 export const getAllUsers = async (_req: Request, res: Response) => {
   try {
     const users = await User.findAll({
-      attributes: { exclude: ['password'] },
+      include: [Drink],
+      attributes: { exclude: ['password']},
     });
     res.json(users);
   } catch (error: any) {

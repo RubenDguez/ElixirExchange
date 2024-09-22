@@ -1,0 +1,12 @@
+.my-drinks table {
+    width: 100%;
+}
+
+.my-drinks table th {
+    padding: 1rem 0px;
+    text-align: left
+}
+
+.my-drinks table tbody tr {
+    line-height: 2rem;
+}
