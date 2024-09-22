@@ -2,10 +2,11 @@ import { motion } from 'framer-motion';
 import { FormEvent, useRef, useState } from 'react';
 import { login } from '../../../api/authAPI';
 import { createUser } from '../../../api/userAPI';
-import Auth from '../../../utils/auth';
+import useAuthenticate from '../../../hooks/authenticate';
 import '../Login/login.css';
 
-const SignUp = ({ toggleTerms }: {toggleTerms: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const SignUp = ({ toggleTerms }: { toggleTerms: React.Dispatch<React.SetStateAction<boolean>> }) => {
+  const authenticate = useAuthenticate();
   const [error, setError] = useState('');
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -32,7 +33,7 @@ const SignUp = ({ toggleTerms }: {toggleTerms: React.Dispatch<React.SetStateActi
       if (newUser === null) throw new Error(`Invalid user data, do you have an account with us?`);
 
       const data = await login({ username, password });
-      if (Object.keys(data).includes('token')) Auth.login(data.token);
+      if (Object.keys(data).includes('token')) authenticate.login(data.token);
       else throw new Error('invalid user data');
     } catch (err) {
       const ERROR = err as Error;
@@ -73,7 +74,9 @@ const SignUp = ({ toggleTerms }: {toggleTerms: React.Dispatch<React.SetStateActi
           <input ref={dobRef} type="date" id="dob" name="dob" style={{ fontFamily: 'Roboto' }} required />
         </motion.div>
         <motion.div className="form-toc" initial={{ opacity: 0, x: '-100%' }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} exit={{ opacity: 0 }}>
-          <label htmlFor="toc">Must accept and acknowledge our <strong onClick={() => toggleTerms(true)}>terms and conditions</strong></label>
+          <label htmlFor="toc">
+            Must accept and acknowledge our <strong onClick={() => toggleTerms(true)}>terms and conditions</strong>
+          </label>
           <input ref={tocRef} type="checkbox" id="toc" name="toc" required />
         </motion.div>
         <motion.div className="form-action" initial={{ opacity: 0, x: '-100%' }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1.1 }} exit={{ opacity: 0 }}>

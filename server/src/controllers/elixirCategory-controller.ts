@@ -37,9 +37,26 @@ export const updateCategory = async (req: Request, res: Response) => {
 
       return;
     }
-    res.status(404).json({ message: 'User not found' });
+    res.status(404).json({ message: 'Category not found' });
   } catch (error) {
     const ERROR = error as Error;
     res.status(500).json({ message: ERROR.message });
   }
 };
+
+export const deleteCategory = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const category = await Category.findByPk(id);
+    if (category) {
+      await category.destroy();
+      res.status(201).json({message: 'Category deleted successfully'});
+      return;
+    }
+
+    res.status(404).json({message: 'Category not found'});
+  } catch (error) {
+    const ERROR = error as Error;
+    res.status(500).json({ message: ERROR.message });
+  }
+}

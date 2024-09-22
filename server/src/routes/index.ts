@@ -9,5 +9,4 @@ const router = Router();
 router.use('/auth', authRoutes);
 router.use('/api', authenticateToken, apiRoutes);
 router.use('/signup', signupRoutes)
-
 export default router;
