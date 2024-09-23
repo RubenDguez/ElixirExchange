@@ -1,24 +1,23 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { CiCircleCheck } from 'react-icons/ci';
-import './drinkSubmission.css';
+import { getAllCategories } from '../../../api/categoryAPI';
+import { createDrink } from '../../../api/drinkAPI';
+import { MyDrinksContext } from '../../../App';
 import useAuthenticate from '../../../hooks/authenticate';
-
-interface IIngredients {
-  quantity: number;
-  units: string;
-  name: string;
-}
+import './drinkSubmission.css';
 
 function DrinkSubmission() {
   const drinkNameRef = useRef<HTMLInputElement>(null);
+  const drinkDescriptionRef = useRef<HTMLInputElement>(null);
+  const categoryRef = useRef<HTMLSelectElement>(null);
   const instructionsRef = useRef<HTMLTextAreaElement>(null);
   const quantityRef = useRef<HTMLInputElement>(null);
   const unitRef = useRef<HTMLInputElement>(null);
   const ingredientNameRef = useRef<HTMLInputElement>(null);
   const [ingredients, setIngredients] = useState<Array<IIngredients>>([]);
   const [categories, setCategories] = useState<Array<{ id: number; name: string }>>([]);
-
-  const { getJwt } = useAuthenticate();
+  const myDrinksContext = useContext(MyDrinksContext);
+  const { getJwt, getDecoded } = useAuthenticate();
 
   // Add ingredient to the list
   const handleAddIngredient = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -41,32 +40,42 @@ function DrinkSubmission() {
     unitRef.current!.value = '';
     ingredientNameRef.current!.value = '';
     quantityRef.current!.focus();
-
   }, []);
 
-  const handleCreateDrink = useCallback(() => {
-    const drinkName = drinkNameRef.current?.value || '';
-    const instructions = instructionsRef.current?.value || '';
-    const theDrink = {
-      name: drinkName,
-      category: '',
-      ingredients,
-      instructions,
-    };
+  const handleCreateDrink = useCallback(
+    async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.preventDefault();
+      const userId = getDecoded(getJwt()!).id;
+      const name = drinkNameRef.current?.value || '';
+      const description = drinkDescriptionRef.current?.value || '';
+      const instructions = instructionsRef.current?.value || '';
+      const categoryId = categoryRef.current?.value || '';
+      const picture = '';
 
-    console.log(theDrink);
-  }, [ingredients]);
+      const drink = {
+        userId,
+        categoryId,
+        name,
+        picture,
+        ingredients,
+        description,
+        instructions,
+      };
+
+      try {
+        await createDrink(drink, getJwt()!);
+        myDrinksContext?.update({ name, description });
+      } catch (error) {
+        const ERROR = error as Error;
+        console.error(ERROR.message);
+      }
+    },
+    [ingredients, myDrinksContext, getJwt, getDecoded],
+  );
 
   useEffect(() => {
     async function fetchCategories() {
-      const response = await fetch('/api/categories', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getJwt()}`,
-        },
-      });
-
-      const data: Array<{ id: number; name: string }> = await response.json();
+      const data = await getAllCategories(getJwt()!);
       setCategories(data);
     }
 
@@ -80,16 +89,21 @@ function DrinkSubmission() {
         <label htmlFor="drink-name">Drink Name</label>
         <input ref={drinkNameRef} type="text" id="drink-name" name="drink-name" />
       </div>
+      <div className="form-field">
+        <label htmlFor="drink-description">Description</label>
+        <input ref={drinkDescriptionRef} type="text" id="drink-description" name="drink-description" />
+      </div>
 
       <div className="form-field">
         <label htmlFor="spirit">Select Spirit</label>
-        <select id="spirit">
+        <select ref={categoryRef} id="spirit">
           <option value="">--Select a spirit--</option>
-          {
-            (categories.length > 0) && categories.map((cat) => (
-              <option key={cat.id} value={cat.id}>{cat.name}</option>
-            ))
-          }
+          {categories.length > 0 &&
+            categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
         </select>
       </div>
 
@@ -144,7 +158,7 @@ function DrinkSubmission() {
         <textarea ref={instructionsRef} id="instructions" name="instructions" rows={8} />
       </div>
 
-      <button onClick={handleCreateDrink}>Submit Drink</button>
+      <button onClick={(e) => handleCreateDrink(e)}>Submit Drink</button>
     </form>
   );
 }

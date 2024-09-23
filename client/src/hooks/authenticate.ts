@@ -2,6 +2,15 @@ import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+interface userInformation {
+  id: number;
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  dob: string;
+}
+
 export default function useAuthenticate() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<JwtPayload | null>(null);
@@ -10,18 +19,35 @@ export default function useAuthenticate() {
   const [isExpired, setIsExpired] = useState(true);
   const [isAuthorized, setIsAuthorized] = useState(false);
 
-  const login = useCallback((token: string) => {
-    localStorage.setItem('id_token', token);
-    navigate(0);
-  }, [navigate]);
+  const login = useCallback(
+    (token: string) => {
+      localStorage.setItem('id_token', token);
+      navigate(0);
+    },
+    [navigate],
+  );
 
   const logout = useCallback(() => {
     localStorage.removeItem('id_token');
   }, []);
 
+  const getDecoded = (jwt: string): JwtPayload & userInformation => {
+    const decoded = jwtDecode<JwtPayload & userInformation>(jwt);
+    return {
+      dob: decoded.dob,
+      email: decoded.email,
+      exp: decoded.exp,
+      firstName: decoded.firstName,
+      iat: decoded.iat,
+      id: decoded.id,
+      lastName: decoded.lastName,
+      username: decoded.username,
+    };
+  };
+
   const getJwt = () => {
-    return localStorage.getItem('id_token')
-  }
+    return localStorage.getItem('id_token');
+  };
 
   useEffect(() => {
     setJWT(() => {
@@ -51,5 +77,5 @@ export default function useAuthenticate() {
     setIsAuthorized(() => isLoggedIn && !isExpired);
   }, [jwt, profile, isLoggedIn, isExpired]);
 
-  return { jwt, profile, isAuthorized, isExpired, isLoggedIn, login, logout, getJwt };
+  return { jwt, profile, isAuthorized, isExpired, isLoggedIn, login, logout, getJwt, getDecoded };
 }
