@@ -1,13 +1,14 @@
 import { Request, Response } from 'express';
 import { Drink, Ingredient, User } from '../models/index.js';
+import { ElixirIngredients } from '../models/elixirIngredients.js';
 
 // * POST /api/drink/
 export const createDrink = async (req: Request, res: Response) => {
   const { name, description, picture, instructions, categoryId, userId } = req.body;
   try {
-    console.log({ name, description, picture, instructions, categoryId, userId });
-
     const newDrink = await Drink.create({ name, description, picture, instructions, categoryId, userId });
+    const drinkIngredients = req.body.ingredients.map((ing: { quantity: number, units: string, name: string }) => ({name: ing.name, amount: ing.quantity, unit: ing.units, elixirId: newDrink.id}))
+    await ElixirIngredients.bulkCreate(drinkIngredients);
     res.status(201).json(newDrink);
   } catch (error) {
     const ERROR = error as Error;

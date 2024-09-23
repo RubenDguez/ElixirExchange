@@ -3,16 +3,20 @@ import { Outlet } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import useAuthenticate from './hooks/authenticate';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
 
 export const DrinkInspirationContext = createContext<IDrinks | null>(null);
-export const MyDrinksContext = createContext<{myDrinks: Array<{ name: string; description: string }>, setMyDrinks: React.Dispatch<React.SetStateAction<{name: string; description: string;}[]>>} | null>(null);
+export const MyDrinksContext = createContext<{myDrinks: Array<{ name: string; description: string }>, update: (drink: {name: string; description: string;}) => void } | null>(null);
 export const AuthenticateContext = createContext<typeof useAuthenticate | null>(null);
 
 function App() {
   const [drinkInspiration, setDrinkInspiration] = useState<IDrinks | null>(null);
   const [myDrinks, setMyDrinks] = useState<Array<{ name: string; description: string }>>([]);
   const authenticate = useAuthenticate();
+
+  const updateMyDrinks = useCallback((drink: {name: string; description: string;}) => {
+    setMyDrinks((prev) => [...prev, drink]);
+  }, []);
 
   useEffect(() => {
     async function getMyDrinks() {
@@ -48,7 +52,7 @@ function App() {
     <div className={authenticate.isLoggedIn ? 'authorized-app' : 'not-authorized-app'}>
       <Navbar />
       <main>
-        <MyDrinksContext.Provider value={{myDrinks, setMyDrinks}}>
+        <MyDrinksContext.Provider value={{myDrinks, update: updateMyDrinks}}>
           <DrinkInspirationContext.Provider value={drinkInspiration}>
             <Outlet />
           </DrinkInspirationContext.Provider>
