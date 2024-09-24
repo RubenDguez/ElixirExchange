@@ -7,15 +7,16 @@
 }
 
 :root {
-  --primary: skyblue;
-  --secondary: blueviolet;
-  --tertiary: rgba(0, 0, 255, 0.63);
+  --primary: #91c83e;
+  --secondary: #f47d20;
+  --tertiary: #f6f2d7;
   --error-background-color: rgba(255, 99, 71, 0.783);
 }
 
 body {
   font-family: "Roboto", sans-serif;
   margin: 0px auto;
+  background-color: var(--tertiary);
 }
 
 h1,h2,h3,h4,h5,h6, label, button {
@@ -64,7 +65,7 @@ button:hover {
 
 main {
   padding: 0px 2rem;
-  color: white;
+  color: var(black);
   width: 1300px;
   margin: 1rem auto;
 }
@@ -75,7 +76,7 @@ footer {
   justify-content: center;
   align-items: center;
   color: black;
-  background-color: var(--primary);
+  background-color: var(--secondary);
   width: 1400px;
   margin: 0px auto;
 }
@@ -91,7 +92,7 @@ footer {
   min-height: 100vh;
   grid-template-rows: auto 1fr auto;
 
-  background-image: url('https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_1080,w_1920/f_jpg/q_65/https://images.citybreakcdn.com/image.aspx%3FImageId%3D6715681');
+  background-image: url('../../client/public/HomeBackground.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

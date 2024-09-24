@@ -2,22 +2,26 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(8px);
     padding: 0px 2rem;
 }
 
 .nav-app-name {
-    font-size: normal;
-    font-weight: 500;
+    font-size: large;
+    font-weight: 600;
     cursor: pointer;
+    font-family: 'Trebuchet MS'
+    
 }
 
 .nav-app-black {
-    color: black;
+    color: var(--secondary);
+    text-shadow: 2px 2px 3px var(--primary);
 }
 
 .nav-app-white {
-    color: white;
+    color: var(--secondary);
+    text-shadow: 2px 2px 3px var(--primary);
 }
 
 .nav-links {

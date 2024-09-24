@@ -31,7 +31,7 @@ export default function LoginSignUp({ hasAccount, setHasAccount }: { hasAccount:
           <motion.p key="do-not-have-an-account" initial={{ opacity: 1, x: '100%' }} animate={{ opacity: 1, x: 0 }} transition={{ ease: 'easeInOut' }} exit={{ opacity: 1 }}>
             Don&apos;t have an account?, please{' '}
             <span>
-              <button onClick={() => setHasAccount(true)}>Sing Up</button>
+              <button onClick={() => setHasAccount(true)}>Sign Up</button>
             </span>
           </motion.p>
         </motion.div>
