@@ -30,6 +30,10 @@ const router = createBrowserRouter([
       }
     ],
   },
+  {
+    path: '/elixir/:id',
+    element: <ElixirExchange />
+  }
 ]);
 
 export default router;
