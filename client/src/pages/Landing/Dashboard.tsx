@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
-import MyDrinks from './MyDrinks/MyDrinks';
+import DrinkList from './MyDrinks/MyDrinks';
 import DrinkInspiration from './DrinkInspiration';
 import AddCategoryForm from './AddCategoryForm';
 import { DrinkInspirationContext, MyDrinksContext } from '../../App';
 import DrinkSubmission from '../../components/Forms/DrinkSubmission/drinkSubmission';
 
-type TActions = null | 'AddCategory' | 'AddDrink' | 'DrinkInspire' | 'MyDrinks';
+type TActions = null | 'AddCategory' | 'AddDrink' | 'DrinkInspire' | 'MyDrinks' | 'AllDrinks';
 
 const buttons: Array<{ value: TActions; label: string }> = [
   { value: null, label: 'Drink Inspiration' },
   { value: 'AddDrink', label: 'Add Drink' },
   { value: 'MyDrinks', label: 'My Drinks' },
+  { value: 'AllDrinks', label: 'All Drinks' },
   { value: 'AddCategory', label: 'Add Category' },
 
 ];
@@ -46,7 +47,9 @@ export default function Dashboard() {
       case 'AddDrink': 
         return <DrinkSubmission /> 
       case 'MyDrinks':
-        return <MyDrinks myDrinks={myDrinks?.myDrinks} />;
+        return <DrinkList myDrinks={myDrinks?.myDrinks} />;
+      case 'AllDrinks':
+        return <DrinkList myDrinks={myDrinks?.myDrinks} />;
       case null:
       default:
         return <DrinkInspiration 

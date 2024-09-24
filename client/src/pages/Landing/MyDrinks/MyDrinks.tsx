@@ -4,7 +4,7 @@ interface IMyDrinks {
   myDrinks: Array<{name: string, description: string}>
 }
 
-export default function MyDrinks({myDrinks}: Partial<IMyDrinks>) {
+export default function DrinkList({myDrinks}: Partial<IMyDrinks>) {
   return (
     <div className='my-drinks'>
       <table>

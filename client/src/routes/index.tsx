@@ -4,6 +4,7 @@ import About from '../pages/About';
 import Contact from '../pages/Contact';
 import Error from '../pages/Error';
 import Landing from '../pages/Landing';
+import ElixirExchange from '../pages/ElixirExchange';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       }
     ],
   },
+  {
+    path: '/elixir/:id',
+    element: <ElixirExchange />
+  }
 ]);
 
 export default router;
