@@ -15,11 +15,26 @@
     padding: 2rem;
 }
 
+.form h1 {
+    color: var(--tertiary);
+    font-weight: bold;
+    text-shadow: 1px 2px 3px var(--primary);
+}
+
 .form-field {
     display: flex;
     flex-direction: column;
     gap: 8px;
     width: 50%;
+}
+
+.form-field label {
+    color: var(--primary);
+    font-weight: bold;
+    text-shadow: 1px 1px 1px var(--secondary);
+    background-color: rgba(0, 0, 0, 0.333);
+    width: 74px;
+    padding: 0
 }
 
 .form-action {

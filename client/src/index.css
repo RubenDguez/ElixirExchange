@@ -76,7 +76,7 @@ footer {
   justify-content: center;
   align-items: center;
   color: black;
-  background-color: var(--secondary);
+  background-color: var(--primary);
   width: 1400px;
   margin: 0px auto;
 }

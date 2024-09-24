@@ -5,7 +5,7 @@
     border-radius: 4px;
     height: 80vh;
     width: auto;
-    overflow: hidden;
+    overflow-y: hidden;
 }
 
 .contact h1 {
