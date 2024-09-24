@@ -85,16 +85,22 @@ footer {
   display: grid;
   min-height: 100vh;
   grid-template-rows: auto 1fr auto;
-  background-color: white;
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+  background-image: url('../../client/public/HomeBackground.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .not-authorized-app {
   display: grid;
   min-height: 100vh;
   grid-template-rows: auto 1fr auto;
-
   background-image: url('../../client/public/HomeBackground.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+
 }

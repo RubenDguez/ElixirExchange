@@ -5,35 +5,19 @@
     border-radius: 4px;
     height: 80vh;
     width: auto;
-<<<<<<< HEAD
-    overflow-y: scroll;
-=======
     overflow-x: scroll;
->>>>>>> b7b40a7abecf05113c79335cd8a317c75f71ab10
 }
 
 .contact h1 {
     font-weight: 600;
 }
 
-<<<<<<< HEAD
-.contact p, h3, h4, h6, strong {
-=======
 .contact p, h3, h4, h5, h6, strong {
->>>>>>> b7b40a7abecf05113c79335cd8a317c75f71ab10
     font-weight: 400!important;
     line-height: 1.5rem;
     letter-spacing: 1px;
     text-align: left!important;
-<<<<<<< HEAD
-    color: black;
-}
-
-.contact h3 {
-    color: var(--primary);
-=======
     color: var(--primary)
->>>>>>> b7b40a7abecf05113c79335cd8a317c75f71ab10
 }
 
 .contact h2 strong {

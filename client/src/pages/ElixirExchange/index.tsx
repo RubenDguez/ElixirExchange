@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-
 import useAuthenticate from '../../hooks/authenticate';
-import './elixir.css';
 
 interface IElixir {
   name: string;
