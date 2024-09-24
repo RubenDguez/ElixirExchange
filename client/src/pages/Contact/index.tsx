@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import rawContact from '/contact.md?url';
 import Markdown from 'react-markdown';
 import './contacts.css'
-import Footer from '../../components/Footer';
 
 export default function Contact() {
   const [contact, setContact] = useState('')
