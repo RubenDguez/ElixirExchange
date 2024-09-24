@@ -50,13 +50,13 @@ export const deleteCategory = async (req: Request, res: Response) => {
     const category = await Category.findByPk(id);
     if (category) {
       await category.destroy();
-      res.status(201).json({message: 'Category deleted successfully'});
+      res.status(201).json({ message: 'Category deleted successfully' });
       return;
     }
 
-    res.status(404).json({message: 'Category not found'});
+    res.status(404).json({ message: 'Category not found' });
   } catch (error) {
     const ERROR = error as Error;
     res.status(500).json({ message: ERROR.message });
   }
-}
+};

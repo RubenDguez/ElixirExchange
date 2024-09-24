@@ -32,7 +32,7 @@ export default function DrinkInspiration({ name, category, glass, instructions, 
               </thead>
               <tbody>
                 {ingredients &&
-                  ingredients.length &&
+                  (ingredients.length > 0) &&
                   ingredients.map((ingredient, index) => (
                     <tr key={ingredient.name + index}>
                       <td>{ingredient.name}</td>
