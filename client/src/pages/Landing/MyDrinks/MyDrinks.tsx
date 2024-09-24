@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
 import './myDrinks.css';
 
 interface IMyDrinks {
-  myDrinks: Array<{name: string, description: string}>
+  myDrinks: Array<{id: number, name: string, description: string}>
 }
 
 export default function DrinkList({myDrinks}: Partial<IMyDrinks>) {
@@ -18,7 +19,7 @@ export default function DrinkList({myDrinks}: Partial<IMyDrinks>) {
           {
             (myDrinks && myDrinks.length > 0) && myDrinks.map((drink, index) => (
               <tr key={drink.name + index}>
-                <td>{drink.name}</td>
+                <td><Link to={`/elixir/${drink.id}`}>{drink.name}</Link></td>
                 <td>{drink.description}</td>
               </tr>
             ))
