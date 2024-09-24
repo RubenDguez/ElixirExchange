@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useCallback, useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import useAuthenticate from './hooks/authenticate';
@@ -22,19 +22,9 @@ function App() {
   const [drinkInspiration, setDrinkInspiration] = useState<IDrinks | null>(null);
   const [myDrinks, setMyDrinks] = useState<Array<IDrink>>([]);
   const authenticate = useAuthenticate();
-  const navigate = useNavigate();
 
   const updateMyDrinks = useCallback((drink: IDrink) => {
     setMyDrinks((prev) => [...prev, drink]);
-  }, []);
-
-  useEffect(() => {
-      const currentLocation = window.location.href;
-      if (authenticate.getJwt() === null && currentLocation.includes('/elixir')) {
-        console.log(currentLocation)
-        navigate(`/elixir/${currentLocation.split('/elixir/')[1]}`)
-      }
-
   }, []);
 
   useEffect(() => {
