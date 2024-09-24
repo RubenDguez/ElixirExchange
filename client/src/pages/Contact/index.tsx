@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import rawContact from '/contact.md?url';
 import Markdown from 'react-markdown';
+<<<<<<< HEAD
 import './contacts.css';
+=======
+import './contacts.css'
+>>>>>>> b7b40a7abecf05113c79335cd8a317c75f71ab10
 
 export default function Contact() {
   const [contact, setContact] = useState('')
