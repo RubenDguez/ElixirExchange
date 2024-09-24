@@ -5,19 +5,23 @@
     border-radius: 4px;
     height: 80vh;
     width: auto;
-    overflow-y: hidden;
+    overflow-y: scroll;
 }
 
 .contact h1 {
     font-weight: 600;
 }
 
-.contact p, h3, h4, h5, h6, strong {
+.contact p, h3, h4, h6, strong {
     font-weight: 400!important;
     line-height: 1.5rem;
     letter-spacing: 1px;
     text-align: left!important;
-    color: var(--primary)
+    color: black;
+}
+
+.contact h3 {
+    color: var(--primary);
 }
 
 .contact h2 strong {
