@@ -25,8 +25,13 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: '/elixir/:id',
-        element: <ElixirExchange />
+        path: '/elixir',
+        children: [
+          {
+            path: ':id',
+            element: <ElixirExchange />
+          }
+        ]
       }
     ],
   },
