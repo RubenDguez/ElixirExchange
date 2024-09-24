@@ -24,6 +24,8 @@ export default function ElixirExchange() {
   useEffect(() => {
     async function getElixir(id: number) {
       try {
+        console.log(id);
+
         const response = await fetch(`/drinks/${id}`);
         const data = await response.json();
 

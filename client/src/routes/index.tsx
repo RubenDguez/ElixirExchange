@@ -8,6 +8,10 @@ import ElixirExchange from '../pages/ElixirExchange';
 
 const router = createBrowserRouter([
   {
+    path: '/elixir/:id',
+    element: <ElixirExchange />
+  },
+  {
     path: '/',
     element: <App />,
     errorElement: <Error />,
@@ -26,10 +30,6 @@ const router = createBrowserRouter([
       }
     ],
   },
-  {
-    path: '/elixir/:id',
-    element: <ElixirExchange />
-  }
 ]);
 
 export default router;
