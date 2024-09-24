@@ -63,8 +63,8 @@ function DrinkSubmission() {
       };
 
       try {
-        await createDrink(drink, getJwt()!);
-        myDrinksContext?.update({ name, description });
+        const newDrink = await createDrink(drink, getJwt()!);
+        myDrinksContext?.update({ id: newDrink.id, name, description });
       } catch (error) {
         const ERROR = error as Error;
         console.error(ERROR.message);

@@ -5,16 +5,25 @@ import Navbar from './components/Navbar';
 import useAuthenticate from './hooks/authenticate';
 import { createContext, useCallback, useEffect, useState } from 'react';
 
+interface IDrink {
+  id: number;
+  name: string;
+  description: string;
+}
+
 export const DrinkInspirationContext = createContext<IDrinks | null>(null);
-export const MyDrinksContext = createContext<{myDrinks: Array<{ id: number, name: string; description: string }>, update: (drink: {name: string; description: string;}) => void } | null>(null);
+export const MyDrinksContext = createContext<{
+  myDrinks: Array<IDrink>;
+  update: (drink: IDrink) => void;
+} | null>(null);
 export const AuthenticateContext = createContext<typeof useAuthenticate | null>(null);
 
 function App() {
   const [drinkInspiration, setDrinkInspiration] = useState<IDrinks | null>(null);
-  const [myDrinks, setMyDrinks] = useState<Array<{ name: string; description: string }>>([]);
+  const [myDrinks, setMyDrinks] = useState<Array<IDrink>>([]);
   const authenticate = useAuthenticate();
 
-  const updateMyDrinks = useCallback((drink: {name: string; description: string;}) => {
+  const updateMyDrinks = useCallback((drink: IDrink) => {
     setMyDrinks((prev) => [...prev, drink]);
   }, []);
 
@@ -28,7 +37,11 @@ function App() {
       });
       const json = await response.json();
       const data = await json;
-      const myDrinks = data[0]['ElixirDrinks'].map((drink: { id: number; name: string; description: string }) => ({ id: drink.id, name: drink.name, description: drink.description }));
+      const myDrinks = data[0]['ElixirDrinks'].map((drink: IDrink) => ({
+        id: drink.id,
+        name: drink.name,
+        description: drink.description,
+      }));
       setMyDrinks(myDrinks);
     }
     if (authenticate.getJwt()) {
@@ -57,7 +70,7 @@ function App() {
     <div className={authenticate.isLoggedIn ? 'authorized-app' : 'not-authorized-app'}>
       <Navbar />
       <main>
-        <MyDrinksContext.Provider value={{myDrinks, update: updateMyDrinks}}>
+        <MyDrinksContext.Provider value={{ myDrinks, update: updateMyDrinks }}>
           <DrinkInspirationContext.Provider value={drinkInspiration}>
             <Outlet />
           </DrinkInspirationContext.Provider>
