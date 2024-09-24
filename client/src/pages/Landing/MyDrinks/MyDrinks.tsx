@@ -19,7 +19,7 @@ export default function DrinkList({myDrinks}: Partial<IMyDrinks>) {
           {
             (myDrinks && myDrinks.length > 0) && myDrinks.map((drink, index) => (
               <tr key={drink.name + index}>
-                <td><Link to={`/elixir/${drink.id}`}>{drink.name}</Link></td>
+                <td><Link to={`/shareable/${drink.id}`}>{drink.name}</Link></td>
                 <td>{drink.description}</td>
               </tr>
             ))
