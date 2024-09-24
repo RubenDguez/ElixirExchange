@@ -6,7 +6,7 @@ import useAuthenticate from './hooks/authenticate';
 import { createContext, useCallback, useEffect, useState } from 'react';
 
 export const DrinkInspirationContext = createContext<IDrinks | null>(null);
-export const MyDrinksContext = createContext<{myDrinks: Array<{ name: string; description: string }>, update: (drink: {name: string; description: string;}) => void } | null>(null);
+export const MyDrinksContext = createContext<{myDrinks: Array<{ id: number, name: string; description: string }>, update: (drink: {name: string; description: string;}) => void } | null>(null);
 export const AuthenticateContext = createContext<typeof useAuthenticate | null>(null);
 
 function App() {
@@ -28,10 +28,12 @@ function App() {
       });
       const json = await response.json();
       const data = await json;
-      const myDrinks = data[0]['ElixirDrinks'].map((drink: { name: string; description: string }) => ({ name: drink.name, description: drink.description }));
+      const myDrinks = data[0]['ElixirDrinks'].map((drink: { id: number; name: string; description: string }) => ({ id: drink.id, name: drink.name, description: drink.description }));
       setMyDrinks(myDrinks);
     }
-    getMyDrinks();
+    if (authenticate.getJwt()) {
+      getMyDrinks();
+    }
   }, []);
 
   useEffect(() => {
@@ -45,7 +47,10 @@ function App() {
       const data: IDrinks = await response.json();
       setDrinkInspiration(data);
     }
-    fetchDrinkInspiration();
+
+    if (authenticate.getJwt()) {
+      fetchDrinkInspiration();
+    }
   }, []);
 
   return (
