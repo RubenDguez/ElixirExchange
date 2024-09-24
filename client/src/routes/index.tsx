@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: '/elixir',
+        path: '/shareable',
         children: [
           {
             path: ':id',
