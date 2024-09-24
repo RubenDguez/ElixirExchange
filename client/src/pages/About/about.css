@@ -1,0 +1,26 @@
+.about {
+    background-color: var(--primary);
+    color: black;
+    padding: 3rem 8rem;
+    border-radius: 4px;
+    height: 80vh;
+    overflow-x: scroll;
+}
+
+.about h1 {
+    font-weight: 600;
+}
+
+.about p, h2, h3, h4, h5, h6, strong {
+    font-weight: 400!important;
+    line-height: 1.5rem;
+    letter-spacing: 1px;
+    text-align: left!important;
+}
+
+.about button {
+    background-color: var(--secondary);
+    width: 100%;
+    color: white;
+    margin-top: 3rem;
+}
